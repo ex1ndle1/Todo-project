@@ -6,7 +6,6 @@ from models import UserRole
 
 load_dotenv() 
 
-
 db_info = {
     "database":os.getenv("DB_NAME"),
     "user":os.getenv("DB_USER"),
@@ -32,7 +31,6 @@ def commit(func):
 
 
 
-# DRY  => Don't repeat yourself
 
 
 def create_user_table():
@@ -50,6 +48,7 @@ def create_user_table():
     cur.execute(user_query)
 
 def create_todo_table():
+       
     todo_query = """create table if not exists todos(
             id serial primary key,
             title varchar(255) not null,
@@ -71,16 +70,13 @@ def init():
 
 
 
-@commit
-def insert_user():
-     insert_user_query = 'insert into users'
+
 
 @commit
 def insert_admin():
     insert_admin_query = '''insert into users(username,password,role)
     values(%s,%s,%s);
     '''
-    data = ('admin',hash_password('admin123'),UserRole.ADMIN.value)
+    data = ('admin1',hash_password('admin123'),UserRole.ADMIN.value)
     cur.execute(insert_admin_query,data)
-
 

@@ -3,6 +3,8 @@ venv
 .venv
 my_venv
 
+__pycache__
+
 data.txt
 
 .env
